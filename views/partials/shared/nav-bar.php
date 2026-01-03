@@ -4,16 +4,26 @@
 
         <div class="ms-auto d-flex gap-3">
             <?php if (isLoggedIn()): ?>
-
-                <a href="/auth/logout" class="btn btn-info">
+                <a href="/" class="btn btn-info">
+                    Početna
+                </a>
+                <a href="/add-car" class="btn btn-info">
+                    Postavi oglas
+                </a>
+                <a href="/auth/logout" class="btn btn-secondary">
                     Izloguj se
                 </a>
-
             <?php else: ?>
-                <button class="btn btn-info" onclick="loginDialog.showModal()">
+                <a href="/" class="btn btn-info">
+                    Početna
+                </a>
+                <button type="button" class="btn btn-info" onclick="loginDialog.showModal()">
+                    Postavi oglas
+                </button>
+                <button type="button" class="btn btn-info" onclick="loginDialog.showModal()">
                     Uloguj se
                 </button>
-                <button class="btn btn-info" onclick="registerDialog.showModal()">
+                <button type="button" class="btn btn-info" onclick="registerDialog.showModal()">
                     Registruj se
                 </button>
             <?php endif; ?>

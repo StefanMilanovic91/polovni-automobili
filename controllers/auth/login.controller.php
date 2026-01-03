@@ -21,7 +21,12 @@ if ($hasValidationError === false) {
     $user = $statement->fetch();
 
     if ($user) {
-        $_SESSION['user'] = $user;
+        $_SESSION['user'] = [
+            'id' => $user->id,
+            'email' => $user->email,
+            'name' => $user->name,
+            'role' => $user->role,
+        ];
     } else {
         $hasValidationError = true;
     }

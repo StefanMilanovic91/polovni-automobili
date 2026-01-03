@@ -20,5 +20,5 @@ function getCSSHref()
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="<?= getCSSHref() ?>">
 
-    <script src="/js/main.js"></script>
+    <script src="/js/main.js" defer></script>
 </head>

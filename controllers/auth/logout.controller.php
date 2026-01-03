@@ -1,5 +1,4 @@
 <?php
-session_unset();
 session_destroy();
 
 // NOTE: Default redirect.
