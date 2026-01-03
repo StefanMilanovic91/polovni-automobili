@@ -91,8 +91,12 @@
 
 <?php require base('views/partials/shared/footer.php'); ?>
 
-<?php require base('views/partials/shared/dialogs/login.php'); ?>
-<?php require base('views/partials/shared/dialogs/register.php'); ?>
+<?php
+if (!isLoggedIn()) {
+    require base('views/partials/shared/dialogs/register.php');
+    require base('views/partials/shared/dialogs/login.php');
+}
+?>
 
 </body>
 </html>
