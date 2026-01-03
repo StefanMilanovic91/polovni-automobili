@@ -41,5 +41,5 @@ function getPath()
 
 function isLoggedIn()
 {
-    return isset($_SESSION['user']['id'], $_SESSION['user']['name']);
+    return isset($_SESSION['user']);
 }

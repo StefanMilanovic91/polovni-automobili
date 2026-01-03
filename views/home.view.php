@@ -5,7 +5,7 @@
 
 <body>
 
-<?php require base('views/partials/shared/navigation.php'); ?>
+<?php require base('views/partials/shared/nav-bar.php'); ?>
 
 <div class="container my-5">
 
@@ -90,6 +90,9 @@
 </div>
 
 <?php require base('views/partials/shared/footer.php'); ?>
+
+<?php require base('views/partials/shared/dialogs/login.php'); ?>
+<?php require base('views/partials/shared/dialogs/register.php'); ?>
 
 </body>
 </html>

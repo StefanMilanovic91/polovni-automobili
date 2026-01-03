@@ -3,3 +3,11 @@ body {
     min-height: 100dvh;
     background-color: #f8f9fa;
 }
+
+dialog::backdrop {
+    background: rgba(0, 0, 0, 0.7);
+}
+
+dialog {
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+}

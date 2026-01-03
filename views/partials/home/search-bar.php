@@ -20,6 +20,6 @@
         </select>
     </div>
     <div class="col-md-2">
-        <button class="btn btn-primary w-100">Pretraži</button>
+        <button class="btn btn-info w-100">Pretraži</button>
     </div>
 </form>

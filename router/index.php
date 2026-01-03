@@ -2,7 +2,10 @@
 
 
 $routes = [
-    '/' => 'controllers/Home.php',
+    '/' => 'controllers/home.controller.php',
+    '/auth/register' => 'controllers/auth/register.controller.php',
+    '/auth/login' => 'controllers/auth/login.controller.php',
+    '/auth/logout' => 'controllers/auth/logout.controller.php'
 ];
 
 $path = getPath();

@@ -19,4 +19,6 @@ function getCSSHref()
           integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="<?= getCSSHref() ?>">
+
+    <script src="/js/main.js"></script>
 </head>
