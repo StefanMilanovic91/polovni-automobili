@@ -103,3 +103,31 @@ VALUES (10, 'Fabia'),
        (10, 'Superb'),
        (10, 'Kodiaq'),
        (10, 'Karoq');
+
+create table ads
+(
+    id          int unsigned auto_increment primary key,
+
+    user_id     int unsigned not null,
+    brand_id    int unsigned not null,
+    model_id    int unsigned not null,
+
+    price       int unsigned not null,
+    year        int unsigned not null,
+    mileage     int unsigned not null,
+    location    varchar(100) not null,
+    description text         not null,
+
+    foreign key (user_id) references users (id),
+    foreign key (brand_id) references car_brands (id),
+    foreign key (model_id) references car_models (id)
+);
+
+create table ad_images
+(
+    id    int unsigned auto_increment primary key,
+    ad_id int unsigned not null,
+    path  varchar(255) not null,
+
+    foreign key (ad_id) references ads (id)
+)

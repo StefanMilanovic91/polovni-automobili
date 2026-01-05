@@ -17,12 +17,12 @@
             <div class="card shadow-sm">
                 <div class="card-body p-4 p-md-5">
 
-                    <form method="POST" action="/add-car">
+                    <form method="POST" action="/add-car" enctype="multipart/form-data">
 
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <label for="brand-selector" class="form-label">Marka</label>
-                                <select id="brand-selector" name="brand" class="form-select" required>
+                                <select id="brand-selector" name="brand_id" class="form-select" required>
                                     <option value="">Izaberite marku</option>
                                     <?php foreach ($brands as $brand): ?>
                                         <option value="<?= $brand->id; ?>">
@@ -34,7 +34,7 @@
 
                             <div class="col-md-6">
                                 <label for="model-selector" class="form-label">Model</label>
-                                <select id="model-selector" name="model" class="form-select" disabled required>
+                                <select id="model-selector" name="model_id" class="form-select" disabled required>
                                     <option value="">Izaberite model</option>
                                 </select>
                             </div>
@@ -91,6 +91,26 @@
                                     placeholder="Stanje, boja, tip motora, oprema..."
                                     required
                             ></textarea>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label">
+                                Slike vozila
+                                <span class="text-muted">(max 3)</span>
+                            </label>
+
+                            <input
+                                    type="file"
+                                    name="images[]"
+                                    class="form-control"
+                                    accept="image/*"
+                                    multiple
+                                    required
+                            >
+
+                            <span class="form-text">
+                                Dozvoljeni formati: JPG i PNG
+                            </span>
                         </div>
 
                         <button type="submit" class="btn btn-success btn-lg w-100">
