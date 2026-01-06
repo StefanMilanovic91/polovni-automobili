@@ -7,7 +7,7 @@
                 <a href="/" class="btn btn-info">
                     Početna
                 </a>
-                <a href="/add-car" class="btn btn-info">
+                <a href="/ads/create" class="btn btn-info">
                     Postavi oglas
                 </a>
                 <a href="/auth/logout" class="btn btn-secondary">

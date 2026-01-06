@@ -1,6 +1,6 @@
 handleDialogs();
-handleBrandAndModelSelectors(); // TODO: This is necessary only on the /add-car page. Include it only there.
-handleYearSelector(); // TODO: This is necessary only on the /add-car page. Include it only there.
+handleBrandAndModelSelectors(); // TODO: This is necessary only on the /ads page. Include it only there.
+handleYearSelector(); // TODO: This is necessary only on the /ads page. Include it only there.
 
 function handleDialogs() {
     const params = new URLSearchParams(window.location.search);
@@ -66,6 +66,9 @@ function handleBrandAndModelSelectors() {
 
 function handleYearSelector() {
     const selector = document.querySelector('#year-selector');
+
+    if (!selector) return;
+
     const startYear = 1900;
     const endYear = 2026;
 

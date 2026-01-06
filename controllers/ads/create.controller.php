@@ -1,18 +1,7 @@
 <?php
 requireLogin();
 
-// THIS IS DONE - TODO: Slusaj na POST method, validiraj pristigle podatke i sacuvaj ih u DB.
-
-// NOTE: Nastavi odavde...
-// TODO: Proveri da li nesto puca ako posaljes nevalidne podatke sa client side-a
-// + prikazi na client side-u da validacija nije prosla
-
-// TODO: Kada sve prodje uspesno nekako prikazi success view i ponudi korisniku opcije:
-// - da vidi dodati oglas - Prikazi Oglas btn
-// - da se vrati na pocetnu str/sve oglase - ???
-// - da ponovo prikaze formu za dodavanje oglasa - Postavi Oglas btn
-
-// TODO: Napravi /ads/show?id={{adId}} page
+// TODO: Prikazi na client side-u da validacija nije prosla
 
 $brands = [];
 $has_validation_error = false;
@@ -23,13 +12,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $brands = $statement->fetchAll();
 } else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $userId = $_SESSION['user']['id'];
-    $brandId = (int)$_POST['brand_id'];
-    $modelId = (int)$_POST['model_id'];
-    $price = (int)$_POST['price'];
-    $year = (int)$_POST['year'];
-    $mileage = (int)$_POST['mileage'];
-    $location = trim($_POST['location']);
-    $description = trim($_POST['description']);
+    $brandId = isset($_POST['brand_id']) ? (int)$_POST['brand_id'] : null;
+    $modelId = isset($_POST['model_id']) ? (int)$_POST['model_id'] : null;
+    $price = isset($_POST['price']) ? (int)$_POST['price'] : null;
+    $year = isset($_POST['year']) ? (int)$_POST['year'] : null;
+    $mileage = isset($_POST['mileage']) ? (int)$_POST['mileage'] : null;
+    $location = isset($_POST['location']) ? trim($_POST['location']) : null;
+    $description = isset($_POST['description']) ? trim($_POST['description']) : null;
 
     $statement = $pdo->prepare('SELECT * FROM car_models WHERE id = :model_id AND brand_id = :brand_id');
     $statement->execute(['model_id' => $modelId, 'brand_id' => $brandId]);
@@ -62,14 +51,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
         if ($ad_id) {
             $allowed_types = ['image/jpeg', 'image/png'];
-            $upload_destination = base("uploads/ads/$ad_id/");
+            $upload_destination = base("public/uploads/ads/$ad_id/");
             $images = $_FILES['images'];
             $image_count = count($images['name']);
 
             if (!is_dir($upload_destination)) {
                 mkdir($upload_destination, 0755, true);
             }
-
+            terminal_var_dump($images);
             for ($i = 0; $i < $image_count; $i++) {
                 if ($images['error'][$i] !== UPLOAD_ERR_OK) {
                     continue;
@@ -90,15 +79,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                         'ad_id' => $ad_id,
                         'path' => 'uploads/ads/' . $ad_id . '/' . $file_name
                     ]);
+                    $last_insert_into_ad_images = $pdo->lastInsertId();
                 }
 
             }
-        }
 
-        header('Location: /add-car');
-        exit;
+            if ($last_insert_into_ad_images) {
+                $_SESSION['ad_id'] = $ad_id;
+            }
+        }
     }
 
+    header('Location: /ads/create');
+    exit;
 }
 
-view('add-car.view', compact('brands', 'has_validation_error'));
+view('ads/create.view', compact('brands', 'has_validation_error'));
