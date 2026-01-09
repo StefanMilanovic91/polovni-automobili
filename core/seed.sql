@@ -129,5 +129,5 @@ create table ad_images
     ad_id int unsigned not null,
     path  varchar(255) not null,
 
-    foreign key (ad_id) references ads (id)
+    foreign key (ad_id) references ads (id) ON DELETE CASCADE
 )

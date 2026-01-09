@@ -19,18 +19,22 @@ $ad_images = $statement2->fetchAll();
 
 $thumbnails = [];
 
-foreach ($ad_images as $img) {
-    if (isset($thumbnails[$img->ad_id])) {
-        continue;
-    } else {
-        $thumbnails[$img->ad_id] = $img->path;
+if ($ad_images) {
+    foreach ($ad_images as $img) {
+        if (isset($thumbnails[$img->ad_id])) {
+            continue;
+        } else {
+            $thumbnails[$img->ad_id] = $img->path;
+        }
     }
 }
 //dd($thumbnails);
 
-foreach ($ads as $ad) {
-    if (isset($thumbnails[$ad->id])) {
-        $ad->thumbnail = isset($thumbnails[$ad->id]) ? $thumbnails[$ad->id] : null;
+if ($ads) {
+    foreach ($ads as $ad) {
+        if (isset($thumbnails[$ad->id])) {
+            $ad->thumbnail = isset($thumbnails[$ad->id]) ? $thumbnails[$ad->id] : null;
+        }
     }
 }
 //terminal_var_dump($ads);

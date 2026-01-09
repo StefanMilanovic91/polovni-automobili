@@ -1,6 +1,7 @@
 handleDialogs();
 handleBrandAndModelSelectors(); // TODO: This is necessary only on the /ads page. Include it only there.
 handleYearSelector(); // TODO: This is necessary only on the /ads page. Include it only there.
+handleRemoveAd(); // TODO: This is necessary only on the /ads page. Include it only there.
 
 function handleDialogs() {
     const params = new URLSearchParams(window.location.search);
@@ -80,4 +81,34 @@ function handleYearSelector() {
 
         selector.appendChild(option);
     }
+}
+
+function handleRemoveAd() {
+    const removeButton = document.getElementById('remove-ad-btn');
+
+    if (!removeButton) return;
+
+    removeButton.addEventListener('click', async (e) => {
+        const adId = removeButton.dataset?.adId;
+
+        if (!adId) return;
+
+        try {
+            const result = await fetch('/ads/delete', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({id: adId})
+            }).then(response => response.json());
+
+            if (result.success === true) {
+                // TODO: Nastavi odavde... Uradi UI update. Prikazi "Uspesno Obrisan Oglas"
+            } else {
+                // TODO: Handle error UI here.
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    });
 }

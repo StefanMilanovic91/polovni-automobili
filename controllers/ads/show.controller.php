@@ -1,11 +1,12 @@
 <?php
 
-$ad_id = isset($_GET['id']) && !empty($_GET['id']) ? (int)$_GET['id'] : null;
+$ad_id = getIdFromQuery();
 
 if (!($ad_id > 0)) {
     http_response_code(404);
     exit;
 }
+// TODO: Add protection in case the ad is not found.
 
 $statement1 = $pdo->prepare("SELECT ads.*, car_brands.name AS brand, car_models.name AS model, users.name AS owner
                                     FROM ads 
@@ -16,6 +17,12 @@ $statement1 = $pdo->prepare("SELECT ads.*, car_brands.name AS brand, car_models.
 ");
 $statement1->execute(['ad_id' => $ad_id]);
 $ad = $statement1->fetch();
+
+// TODO: Napravi view za ovaj slucaj - oglas nije pronadjen
+if (!$ad) {
+    http_response_code(404);
+    exit;
+}
 
 $statement2 = $pdo->prepare("SELECT * FROM ad_images WHERE ad_id = :ad_id");
 $statement2->execute(['ad_id' => $ad_id]);

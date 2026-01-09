@@ -1,6 +1,12 @@
 <div class="alert alert-success display-6 mb-0 text-center py-5 d-flex flex-column align-items-center">
     <span>
-        Uspešno postavljen oglas
+        <?php
+        if (getPath() === '/ads/create') {
+            echo "Uspešno postavljen oglas";
+        } else if(getPath() === '/ads/edit') {
+            echo "Uspešno izmenjen oglas";
+        }
+        ?>
     </span>
     <svg height="220px" width="220px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 600">
         <path fill="#008000"

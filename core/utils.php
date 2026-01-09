@@ -51,3 +51,8 @@ function requireLogin()
         exit;
     }
 }
+
+function getIdFromQuery()
+{
+    return isset($_GET['id']) && !empty($_GET['id']) ? (int)$_GET['id'] : null;
+}
