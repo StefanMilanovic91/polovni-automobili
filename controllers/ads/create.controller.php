@@ -1,8 +1,6 @@
 <?php
 requireLogin();
 
-// TODO: Prikazi na client side-u da validacija nije prosla
-
 $brands = [];
 $has_validation_error = false;
 
@@ -31,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         $mileage < 0 ||
         strlen($location) < 2 ||
         strlen($description) < 10 ||
-        empty($_FILES['images']) || empty($_FILES['images']['name'][0]) || count($_FILES['images']['name']) > 3;
+        empty($_FILES['images']) || empty($_FILES['images']['name'][0]) || count($_FILES['images']['name']) > 3 || count($_FILES['images']['name']) < 1;
 
     if (!$has_validation_error) {
         $statement = $pdo->prepare('INSERT INTO
@@ -90,8 +88,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         }
     }
 
-    header('Location: /ads/create');
+    header('Location: /ads/create' . ($has_validation_error ? '?hasValidationError=true' : ''));
     exit;
 }
 
-view('ads/create.view', compact('brands', 'has_validation_error'));
+view('ads/create.view', compact('brands'));

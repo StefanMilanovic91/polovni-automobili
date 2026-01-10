@@ -11,16 +11,18 @@
 
     <div class="row justify-content-center">
         <div class="col-12 col-md-10 col-lg-8">
-            <?php if (isLoggedIn() && $ad->user_id === $_SESSION['user']['id']): ?>
-                <a href="/ads/edit?id=<?= $ad->id ?>"
-                   class="btn btn-secondary mb-3">
-                    Izmeni
-                </a>
-                <button id="remove-ad-btn" data-ad-id="<?= $ad->id ?>" class="btn btn-danger mb-3">
-                    Obriši
-                </button>
-            <?php endif; ?>
-            <div class="card shadow-sm">
+            <div id="ad-update-buttons">
+                <?php if (isLoggedIn() && $ad->user_id === $_SESSION['user']['id']): ?>
+                    <a href="/ads/edit?id=<?= $ad->id ?>"
+                       class="btn btn-secondary mb-3">
+                        Izmeni
+                    </a>
+                    <button id="remove-ad-btn" data-ad-id="<?= $ad->id ?>" class="btn btn-danger mb-3">
+                        Obriši
+                    </button>
+                <?php endif; ?>
+            </div>
+            <div id="ad-card" class="card shadow-sm">
                 <div class="card-body p-4 p-md-5">
 
                     <div class="row g-4">

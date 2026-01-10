@@ -89,6 +89,18 @@
         <span class="form-text">Dozvoljeni formati: JPG i PNG</span>
     </div>
 
+    <div id="errorMessageBox" style="font-size: 14px; display:none;" class="alert alert-danger">
+        <p class="mb-1 fw-bold" style="color:red;">Greška prilikom validacije.</p>
+        <p class="mb-0" style="color:gray;"><strong>Marka</strong> - obavezno izaberite marku</p>
+        <p class="mb-0" style="color:gray;"><strong>Model</strong> - obavezno izaberite model</p>
+        <p class="mb-0" style="color:gray;"><strong>Cena</strong> - obavezno upisite cenu</p>
+        <p class="mb-0" style="color:gray;"><strong>Godište</strong> - obavezno upisite godište</p>
+        <p class="mb-0" style="color:gray;"><strong>Kilometraža</strong> - obavezno upisite kilometražu</p>
+        <p class="mb-0" style="color:gray;"><strong>Lokacija</strong> - obavezno upisite lokaciju</p>
+        <p class="mb-0" style="color:gray;"><strong>Kratak opis</strong> - obavezno dodajte kratak opis</p>
+        <p class="mb-0" style="color:gray;"><strong>Slike vozila</strong> - minimum jedna a maksimum tri slike</p>
+    </div>
+
     <button type="submit" class="btn btn-success btn-lg w-100">
         Postavi oglas
     </button>

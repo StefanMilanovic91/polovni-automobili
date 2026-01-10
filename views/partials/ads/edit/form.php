@@ -94,8 +94,13 @@
     <!--        <span class="form-text">Dozvoljeni formati: JPG i PNG</span>-->
     <!--    </div>-->
 
-    <button class="btn btn-success btn-lg w-100">
+    <button type="submit" class="btn btn-success btn-lg w-100">
         Sačuvaj izmene
     </button>
-
+    <button type="button"
+            data-ad-id="<?= $ad->id ?>"
+            id="remove-ad-btn"
+            class="btn btn-danger btn-lg w-100 mt-3">
+        Obrisi oglas
+    </button>
 </form>

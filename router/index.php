@@ -13,7 +13,7 @@ $routes = [
     '/auth/login' => 'controllers/auth/login.controller.php',
     '/auth/logout' => 'controllers/auth/logout.controller.php',
 
-    '/get-models' => 'controllers/get-models.controller.php' // TODO: Preimenuj u /models
+    '/models' => 'controllers/models.controller.php'
 ];
 
 $path = getPath();
@@ -21,7 +21,5 @@ $path = getPath();
 if (isset($routes[$path])) {
     require base($routes[$path]);
 } else {
-    http_response_code(404);
-    // TODO: Create controllers/NotFound.php
-    // require base('');
+    require base('controllers/not-found.controller.php');
 }
