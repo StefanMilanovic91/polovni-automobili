@@ -111,6 +111,7 @@ create table ads
     user_id     int unsigned not null,
     brand_id    int unsigned not null,
     model_id    int unsigned not null,
+    image_id    int unsigned null,
 
     price       int unsigned not null,
     year        int unsigned not null,
@@ -120,7 +121,8 @@ create table ads
 
     foreign key (user_id) references users (id),
     foreign key (brand_id) references car_brands (id),
-    foreign key (model_id) references car_models (id)
+    foreign key (model_id) references car_models (id),
+    foreign key (image_id) references ad_images (id)
 );
 
 create table ad_images

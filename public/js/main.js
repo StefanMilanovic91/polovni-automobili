@@ -2,7 +2,9 @@ handleDialogs();
 handleBrandAndModelSelectors(); // TODO: This is necessary only on the /ads page. Include it only there.
 handleYearSelector(); // TODO: This is necessary only on the /ads page. Include it only there.
 handleRemoveAd(); // TODO: This is necessary only on the /ads page. Include it only there.
-handleCreateAdValidationError();
+handleCreateAdValidationError(); // TODO: This is necessary only on the /ads page. Include it only there.
+sanitizeSearchQueryForm(); // TODO: This is necessary only on the / page. Include it only there.
+populateSearchFormFromQuery(); // TODO: This is necessary only on the / page. Include it only there.
 
 function handleDialogs() {
     const params = new URLSearchParams(window.location.search);
@@ -38,9 +40,11 @@ function handleBrandAndModelSelectors() {
 
     brandSelector.addEventListener('change', function (e) {
         const brandId = this.value;
+        const isAdsCreatePage = window.location.pathname === '/ads/create';
 
         if (!brandId) {
-            modelSelector.innerHTML = '<option value="">Izaberite model</option>';
+            modelSelector.innerHTML = `<option value="">${isAdsCreatePage ? 'Izaberite model' : 'Model'}</option>`;
+            modelSelector.setAttribute('disabled', '');
 
             return;
         }
@@ -50,7 +54,7 @@ function handleBrandAndModelSelectors() {
 
             modelSelector.removeAttribute('disabled');
 
-            let options = '<option value="">Izaberite model</option>';
+            let options = `<option value="">${isAdsCreatePage ? 'Izaberite model' : 'Model'}</option>`;
 
             models.forEach(function (model) {
                 options += '<option value="' + model.id + '">' + model.name + '</option>';
@@ -160,5 +164,80 @@ function handleCreateAdValidationError() {
         if (errorMessageBox) {
             errorMessageBox.style.display = 'block';
         }
+    }
+}
+
+// TODO: Rethink how to refactor the following sanitizeSearchQueryForm func
+// NOTE: Try to select them with querySelectorAll('[name="brand_id"], [name="model_id"], [name="price_from"], [name="price_to"]')
+function sanitizeSearchQueryForm() {
+    const form = document.querySelector('#search-bar-form');
+
+    if (!form) return;
+
+    const brand = form.querySelector("[name='brand_id']");
+    const model = form.querySelector("[name='model_id']");
+    const priceFrom = form.querySelector("[name='price_from']");
+    const priceTo = form.querySelector("[name='price_to']");
+
+    if (!brand || !model || !priceFrom || !priceTo) return;
+
+    form.addEventListener('submit', function (e) {
+        if (!brand.value && !model.value && !priceFrom.value && !priceTo.value) {
+            e.preventDefault();
+            return;
+        }
+
+        if (!brand.value) brand.setAttribute('disabled', '');
+        if (!model.value) model.setAttribute('disabled', '');
+        if (!priceFrom.value) priceFrom.setAttribute('disabled', '');
+        if (!priceTo.value) priceTo.setAttribute('disabled', '');
+    });
+}
+
+// TODO: Refactor the following shit
+function populateSearchFormFromQuery() {
+    const form = document.querySelector('#search-bar-form');
+
+    if (!form) return;
+
+    const params = new URLSearchParams(window.location.search);
+
+
+    const inputs = form.querySelectorAll('[name="brand_id"], [name="price_from"], [name="price_to"]');
+
+    inputs.forEach(input => {
+        const name = input.name;
+        if (!name) return;
+
+        // If URL has this parameter, set it as the input value
+        if (params.has(name)) {
+            input.value = params.get(name);
+        }
+    });
+
+    if (params.has('brand_id')) {
+        const modelSelector = document.querySelector('#model-selector');
+
+        function displayModels(models) {
+            if (!models?.length) return;
+
+
+            let options = `<option value="">Model</option>`;
+
+            models.forEach(function (model) {
+                options += `<option value="${model.id}">${model.name}</option>`;
+            });
+
+            modelSelector.innerHTML = options;
+            modelSelector.removeAttribute('disabled');
+
+            if (params.has('model_id')) {
+                modelSelector.value = params.get('model_id');
+            }
+        }
+
+        fetch(`/models?brand_id=${params.get('brand_id')}`)
+            .then(response => response?.json?.())
+            .then(displayModels);
     }
 }
