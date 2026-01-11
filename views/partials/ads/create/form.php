@@ -97,7 +97,7 @@
         <p class="mb-0" style="color:gray;"><strong>Godište</strong> - obavezno upisite godište</p>
         <p class="mb-0" style="color:gray;"><strong>Kilometraža</strong> - obavezno upisite kilometražu</p>
         <p class="mb-0" style="color:gray;"><strong>Lokacija</strong> - obavezno upisite lokaciju</p>
-        <p class="mb-0" style="color:gray;"><strong>Kratak opis</strong> - obavezno dodajte kratak opis</p>
+        <p class="mb-0" style="color:gray;"><strong>Kratak opis</strong> - obavezno dodajte opis(min 10 karaktera)</p>
         <p class="mb-0" style="color:gray;"><strong>Slike vozila</strong> - minimum jedna a maksimum tri slike</p>
     </div>
 

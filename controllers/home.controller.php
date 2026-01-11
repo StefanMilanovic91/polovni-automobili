@@ -47,4 +47,6 @@ $statement2 = $pdo->prepare("SELECT * FROM car_brands");
 $statement2->execute();
 $brands = $statement2->fetchAll();
 
-view('home.view', compact('ads', 'brands'));
+$css_file_name = 'home.css';
+
+view('home.view', compact('ads', 'brands', 'css_file_name'));

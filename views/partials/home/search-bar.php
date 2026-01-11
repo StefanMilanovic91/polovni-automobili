@@ -18,7 +18,7 @@
         <input
                 type="number"
                 name="price_from"
-                class="form-select"
+                class="form-control"
                 placeholder="Cena od (EUR)"
         >
     </div>
@@ -26,11 +26,14 @@
         <input
                 type="number"
                 name="price_to"
-                class="form-select"
+                class="form-control"
                 placeholder="Cena do (EUR)"
         >
     </div>
     <div class="col-md-2">
-        <button type="submit" class="btn btn-info w-100">Pretraži</button>
+        <button type="submit" class="btn btn-info w-100 px-0">Pretraži</button>
+    </div>
+    <div class="col-1" style="max-width: max-content">
+        <a href="/" type="button" class="btn btn-info">X</a>
     </div>
 </form>
