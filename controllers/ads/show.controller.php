@@ -18,7 +18,7 @@ $statement1 = $pdo->prepare("SELECT ads.*, car_brands.name AS brand, car_models.
 $statement1->execute(['ad_id' => $ad_id]);
 $ad = $statement1->fetch();
 
-// TODO: Napravi view za ovaj slucaj - oglas nije pronadjen
+// TODO: Add view for case that ad is not found
 if (!$ad) {
     http_response_code(404);
     exit;

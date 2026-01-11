@@ -57,6 +57,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 mkdir($upload_destination, 0755, true);
             }
 
+            $first_image_path = null;
+
             for ($i = 0; $i < $image_count; $i++) {
                 if ($images['error'][$i] !== UPLOAD_ERR_OK) {
                     continue;
@@ -72,17 +74,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 $full_upload_destination = $upload_destination . $file_name;
 
                 if (move_uploaded_file($images['tmp_name'][$i], $full_upload_destination)) {
+                    $path = 'uploads/ads/' . $ad_id . '/' . $file_name;
+
                     $statement3 = $pdo->prepare("INSERT INTO ad_images (ad_id, path) VALUES (:ad_id, :path)");
                     $statement3->execute([
                         'ad_id' => $ad_id,
-                        'path' => 'uploads/ads/' . $ad_id . '/' . $file_name
+                        'path' => $path
                     ]);
                     $last_insert_into_ad_images = $pdo->lastInsertId();
 
-                    $statement4 = $pdo->prepare("UPDATE ads SET image_id = :image_id WHERE id = :ad_id");
-                    $statement4->execute(['image_id' => $last_insert_into_ad_images, 'ad_id' => $ad_id]);
+                    if (!$first_image_path) {
+                        $first_image_path = $path;
+                    }
                 }
 
+            }
+
+            if ($first_image_path) {
+                $statement4 = $pdo->prepare("UPDATE ads SET thumbnail = :thumbnail WHERE id = :ad_id");
+                $statement4->execute(['thumbnail' => $first_image_path, 'ad_id' => $ad_id]);
             }
 
             if ($last_insert_into_ad_images) {

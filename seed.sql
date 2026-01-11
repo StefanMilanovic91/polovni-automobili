@@ -1,5 +1,5 @@
-CREATE DATABASE polovni_automobili_db;
-use polovni_automobili_db;
+CREATE DATABASE polovni_automobili_db_v2;
+USE polovni_automobili_db_v2;
 
 CREATE TABLE users
 (
@@ -104,32 +104,32 @@ VALUES (10, 'Fabia'),
        (10, 'Kodiaq'),
        (10, 'Karoq');
 
-create table ads
+CREATE TABLE ads
 (
-    id          int unsigned auto_increment primary key,
+    id          INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 
-    user_id     int unsigned not null,
-    brand_id    int unsigned not null,
-    model_id    int unsigned not null,
-    image_id    int unsigned null,
+    user_id     INT UNSIGNED NOT NULL,
+    brand_id    INT UNSIGNED NOT NULL,
+    model_id    INT UNSIGNED NOT NULL,
+    image_id    INT UNSIGNED NOT NULL,
 
-    price       int unsigned not null,
-    year        int unsigned not null,
-    mileage     int unsigned not null,
-    location    varchar(100) not null,
-    description text         not null,
+    price       INT UNSIGNED NOT NULL,
+    year        INT UNSIGNED NOT NULL,
+    mileage     INT UNSIGNED NOT NULL,
+    location    VARCHAR(100) NOT NULL,
+    description text         NOT NULL,
+    thumbnail   VARCHAR(255) NOT NULL,
 
-    foreign key (user_id) references users (id),
-    foreign key (brand_id) references car_brands (id),
-    foreign key (model_id) references car_models (id),
-    foreign key (image_id) references ad_images (id)
+    FOREIGN KEY (user_id) REFERENCES users (id),
+    FOREIGN KEY (brand_id) REFERENCES car_brands (id),
+    FOREIGN KEY (model_id) REFERENCES car_models (id)
 );
 
-create table ad_images
+CREATE TABLE ad_images
 (
-    id    int unsigned auto_increment primary key,
-    ad_id int unsigned not null,
-    path  varchar(255) not null,
+    id    INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    ad_id INT UNSIGNED NOT NULL,
+    path  VARCHAR(255) NOT NULL,
 
-    foreign key (ad_id) references ads (id) ON DELETE CASCADE
-)
+    FOREIGN KEY (ad_id) REFERENCES ads (id) ON DELETE CASCADE
+);

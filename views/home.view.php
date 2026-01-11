@@ -13,7 +13,7 @@ $has_ads = is_array($ads) && count($ads) > 0;
 
 <div class="container my-5">
 
-    <h2 class="text-center fw-bold mb-5">POLOVNI AUTOMOBILI</h2>
+    <h2 class="page-title text-center fw-bold mb-5">Polovni <span>automobili</span></h2>
 
     <?php require base('views/partials/home/search-bar.php'); ?>
 

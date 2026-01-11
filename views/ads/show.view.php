@@ -11,13 +11,13 @@
 
     <div class="row justify-content-center">
         <div class="col-12 col-md-10 col-lg-8">
-            <div id="ad-update-buttons">
+            <div id="ad-update-buttons" class="d-flex mb-3 gap-3">
                 <?php if (isLoggedIn() && $ad->user_id === $_SESSION['user']['id']): ?>
                     <a href="/ads/edit?id=<?= $ad->id ?>"
-                       class="btn btn-secondary mb-3">
+                       class="btn btn-secondary">
                         Izmeni
                     </a>
-                    <button id="remove-ad-btn" data-ad-id="<?= $ad->id ?>" class="btn btn-danger mb-3">
+                    <button id="remove-ad-btn" data-ad-id="<?= $ad->id ?>" class="btn btn-danger">
                         Obriši
                     </button>
                 <?php endif; ?>

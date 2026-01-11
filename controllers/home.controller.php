@@ -9,13 +9,11 @@ $priceTo = empty($_GET['price_to']) ? null : $_GET['price_to'];
 $query = "SELECT ads.*, 
                users.name AS owner, 
                car_brands.name AS brand, 
-               car_models.name AS model, 
-               ad_images.path AS thumbnail 
+               car_models.name AS model 
             FROM ads 
             JOIN users ON ads.user_id = users.id 
             JOIN car_brands ON car_brands.id = ads.brand_id 
             JOIN car_models ON car_models.id = ads.model_id 
-            JOIN ad_images ON ad_images.id = ads.image_id 
             WHERE 1";
 $params = [];
 

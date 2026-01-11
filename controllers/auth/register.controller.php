@@ -40,7 +40,6 @@ if ($hasValidationError) {
     exit;
 }
 
-// NOTE: Default redirect.
 // TODO: Check from where user navigate and redirect there.
 header('Location: /');
 exit;

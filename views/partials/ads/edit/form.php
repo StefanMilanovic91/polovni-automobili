@@ -101,6 +101,6 @@
             data-ad-id="<?= $ad->id ?>"
             id="remove-ad-btn"
             class="btn btn-danger btn-lg w-100 mt-3">
-        Obrisi oglas
+        Obriši oglas
     </button>
 </form>

@@ -2,6 +2,8 @@ body {
     height: 100dvh;
     min-height: 100dvh;
     background-color: #f8f9fa;
+    overflow-x: hidden;
+    font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
 }
 
 dialog::backdrop {
@@ -10,4 +12,71 @@ dialog::backdrop {
 
 dialog {
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+}
+
+.logo {
+    font-size: 22px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #0dcaf0;
+    position: relative;
+}
+
+.logo::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 3px;
+    width: 68px;
+    height: 3px;
+    background-color: #0dcaf0;
+    border-radius: 2px;
+}
+
+.logo:hover::after {
+    background-color: black;
+}
+
+.page-title {
+    font-size: 42px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #212529;
+}
+
+.page-title > span {
+    position: relative;
+    color: #0dcaf0;
+}
+
+.page-title > span::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    right: 0;
+    width: 288px;
+    height: 4px;
+    background-color: #0dcaf0;
+    border-radius: 4px;
+}
+
+.edit-title {
+    font-size: 36px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-align: center;
+    margin: 30px 0 40px;
+    position: relative;
+    color: #212529;
+}
+
+.edit-title::after {
+    content: '';
+    display: block;
+    width: 242px;
+    height: 4px;
+    background: linear-gradient(90deg, #0dcaf0, #20c997);
+    margin: 14px auto 0;
+    border-radius: 4px;
 }

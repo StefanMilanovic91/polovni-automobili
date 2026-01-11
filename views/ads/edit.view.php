@@ -13,7 +13,7 @@ $is_successful_update = !empty($_SESSION['ad_id']);
 
 <div class="container my-5">
 
-    <?= !$is_successful_update ? "<h2 id='ad-update-title' class='text-center fw-bold mb-5'>Izmeni Oglas</h2>" : '' ?>
+    <?= $is_successful_update ? '' : "<h2 id='ad-update-title' class='edit-title'>Izmeni Oglas</h2>" ?>
 
     <div class="row justify-content-center">
         <div class="col-12 col-md-10 col-lg-8">

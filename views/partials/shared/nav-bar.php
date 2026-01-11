@@ -1,6 +1,6 @@
 <nav class="navbar navbar-light bg-white border-bottom">
     <div class="container">
-        <a class="navbar-brand fw-bold" href="/">LOGO</a>
+        <a class="logo navbar-brand fw-bold" href="/">LOGO</a>
 
         <div class="ms-auto d-flex gap-3">
             <?php if (isLoggedIn()): ?>

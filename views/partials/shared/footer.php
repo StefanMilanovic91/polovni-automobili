@@ -1,4 +1,4 @@
-<footer class="bg-white border-top py-3">
+<footer class="position-sticky top-100 bg-white border-top py-3">
     <div class="container d-flex justify-content-between small text-muted">
         <div>© <?= date('Y') ?> Polovni Automobili</div>
         <div>
