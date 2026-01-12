@@ -4,7 +4,7 @@
 $routes = [
     '/' => 'controllers/home.controller.php',
 
-    '/ads/create' => 'controllers/ads/create.controller.php', // TODO: Mozda submit moze da salje na /ads/store - POST
+    '/ads/create' => 'controllers/ads/create.controller.php',
     '/ads/show' => 'controllers/ads/show.controller.php',
     '/ads/edit' => 'controllers/ads/edit.controller.php',
     '/ads/delete' => 'controllers/ads/delete.controller.php',
