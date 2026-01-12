@@ -11,7 +11,7 @@
 
     <div class="row justify-content-center">
         <div class="col-12 col-md-10 col-lg-8">
-            <div id="ad-update-buttons" class="d-flex mb-3 gap-3">
+            <div id="ad-update-buttons" class="mb-3 gap-3">
                 <?php if (isLoggedIn() && $ad->user_id === $_SESSION['user']['id']): ?>
                     <a href="/ads/edit?id=<?= $ad->id ?>"
                        class="btn btn-secondary">
