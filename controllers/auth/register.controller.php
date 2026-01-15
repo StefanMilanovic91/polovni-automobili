@@ -5,7 +5,6 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
-$user = new User($pdo);
 $user->register();
 
 if ($user->has_validation_error) {
@@ -14,7 +13,7 @@ if ($user->has_validation_error) {
 }
 
 if ($user->is_registered_successfully) {
-    header('Location: /?dialog=login');
+    header('Location: /?dialog=login&isRegisteredSuccessfully=true');
     exit;
 }
 

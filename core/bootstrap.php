@@ -14,6 +14,7 @@ session_start();
 define('BASE_PATH', dirname(__DIR__) . '/');
 
 $pdo = Connection::connect();
+$user = new User($pdo);
 
 require BASE_PATH . 'core/utils.php';
 require base('router/index.php');
