@@ -7,7 +7,7 @@ class User extends QueryBuilder
 
     public function login(): void
     {
-        $values = $this->getValidatedLoginValues();
+        $values = $this->getValidatedLogInValues();
 
         if (!$values) {
             return;
@@ -80,7 +80,7 @@ class User extends QueryBuilder
         ];
     }
 
-    private function getValidatedLoginValues(): null|array
+    private function getValidatedLogInValues(): null|array
     {
         $email = isset($_POST['email']) ? trim($_POST['email']) : null;
         $password = isset($_POST['password']) ? trim($_POST['password']) : null;
