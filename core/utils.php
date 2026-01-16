@@ -56,3 +56,8 @@ function getIdFromQuery()
 {
     return isset($_GET['id']) && !empty($_GET['id']) ? (int)$_GET['id'] : null;
 }
+
+function getSessionUser()
+{
+    return empty($_SESSION['user']) ? null : $_SESSION['user'];
+}
