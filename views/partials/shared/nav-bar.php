@@ -1,32 +1,41 @@
 <nav class="navbar navbar-light bg-white border-bottom">
-    <div class="container">
-        <a class="logo navbar-brand fw-bold" href="/">LOGO</a>
+	<div class="container">
+		<a class="logo navbar-brand fw-bold" href="/">LOGO</a>
 
-        <div class="ms-auto d-flex gap-3">
-            <?php if (isLoggedIn()): ?>
-                <a href="/" class="btn btn-info">
-                    Početna
-                </a>
-                <a href="/ads/create" class="btn btn-info">
-                    Postavi oglas
-                </a>
-                <a href="/auth/logout" class="btn btn-secondary">
-                    Izloguj se
-                </a>
-            <?php else: ?>
-                <a href="/" class="btn btn-info">
-                    Početna
-                </a>
-                <button type="button" class="btn btn-info" onclick="loginDialog.showModal()">
-                    Postavi oglas
-                </button>
-                <button type="button" class="btn btn-info" onclick="loginDialog.showModal()">
-                    Uloguj se
-                </button>
-                <button type="button" class="btn btn-info" onclick="registerDialog.showModal()">
-                    Registruj se
-                </button>
-            <?php endif; ?>
-        </div>
-    </div>
+		<div class="ms-auto d-flex gap-3">
+			<?php if (isLoggedIn()): ?>
+				<a href="/" class="btn btn-info">
+					Početna
+				</a>
+				<a href="/ads/create" class="btn btn-info">
+					Postavi oglas
+				</a>
+				<a href="/auth/logout" class="btn btn-secondary">
+					Izloguj se
+				</a>
+			<?php else: ?>
+				<a href="/" class="btn btn-info">
+					Početna
+				</a>
+				<button type="button" class="btn btn-info" onclick="loginDialog.showModal()">
+					Postavi oglas
+				</button>
+				<button type="button" class="btn btn-info" onclick="loginDialog.showModal()">
+					Uloguj se
+				</button>
+				<button type="button" class="btn btn-info" onclick="registerDialog.showModal()">
+					Registruj se
+				</button>
+			<?php endif; ?>
+		</div>
+		<?php if (isLoggedIn()): ?>
+			<div
+				class="rounded-circle bg-secondary d-flex justify-content-center align-items-center ms-3"
+				style="max-width: 38px; max-height: 38px; height: 38px; width: 38px;">
+				<strong class="fs-4 text-white">
+					<?= getSessionUser()['name'][0] ?>
+				</strong>
+			</div>
+		<?php endif; ?>
+	</div>
 </nav>
