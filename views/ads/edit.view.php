@@ -1,5 +1,5 @@
 <?php
-$is_successful_update = !empty($_SESSION['ad_id']);
+$is_successful_update = empty($_SESSION['ad_id']) === false;
 ?>
 
 <!DOCTYPE html>

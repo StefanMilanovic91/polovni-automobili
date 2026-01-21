@@ -8,6 +8,7 @@
 require_once '../models/Connection.php';
 require_once '../models/QueryBuilder.php';
 require_once '../models/User.php';
+require_once '../models/Ad.php';
 
 session_start();
 
@@ -15,6 +16,7 @@ define('BASE_PATH', dirname(__DIR__) . '/');
 
 $pdo = Connection::connect();
 $user = new User($pdo);
+$ad = new Ad($pdo);
 
 require BASE_PATH . 'core/utils.php';
 require base('router/index.php');
