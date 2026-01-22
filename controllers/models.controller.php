@@ -14,10 +14,7 @@ if (!isset($_GET['brand_id']) || empty($_GET['brand_id'])) {
     exit;
 }
 
-
-$statement = $pdo->prepare("SELECT * FROM car_models WHERE brand_id = :brand_id");
-$statement->execute(['brand_id' => $_GET['brand_id']]);
-$models = $statement->fetchAll();
+$models = $carModels->findByBrand($_GET['brand_id']);
 
 echo json_encode($models);
 exit;

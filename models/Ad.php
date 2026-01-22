@@ -1,24 +1,73 @@
 <?php
 
-use JetBrains\PhpStorm\NoReturn;
-
 class Ad extends QueryBuilder
 {
     public bool $has_validation_error = false;
     public bool $is_ad_removed = false;
+    private CarModels $carModels;
+
+    public function __construct($pdo)
+    {
+        parent::__construct($pdo);
+        $this->carModels = new CarModels($pdo);
+    }
+
+    public function getImages($id): array
+    {
+        $statement2 = $this->pdo->prepare("SELECT * FROM ad_images WHERE ad_id = :ad_id");
+        $statement2->execute(['ad_id' => $id]);
+
+        return $statement2->fetchAll();
+    }
+
+    public function searchAds($brandId, $modelId, $priceFrom, $priceTo): array
+    {
+        $query = "SELECT ads.*, 
+               users.name AS owner, 
+               car_brands.name AS brand, 
+               car_models.name AS model 
+            FROM ads 
+            JOIN users ON ads.user_id = users.id 
+            JOIN car_brands ON car_brands.id = ads.brand_id 
+            JOIN car_models ON car_models.id = ads.model_id 
+            WHERE 1";
+        $params = [];
+
+        if ($brandId) {
+            $query .= " AND ads.brand_id = :brand_id";
+            $params["brand_id"] = $brandId;
+        }
+        if ($modelId) {
+            $query .= " AND ads.model_id = :model_id";
+            $params["model_id"] = $modelId;
+        }
+        if ($priceFrom) {
+            $query .= " AND ads.price >= :price_from";
+            $params["price_from"] = $priceFrom;
+        }
+        if ($priceTo) {
+            $query .= " AND ads.price <= :price_to";
+            $params["price_to"] = $priceTo;
+        }
+
+        $statement = $this->pdo->prepare($query);
+        $statement->execute($params);
+
+        return $statement->fetchAll();
+    }
 
     public function get($id)
     {
-        $statement1 = $this->pdo->prepare("SELECT ads.*, car_brands.name AS brand, car_models.name AS model, users.name AS owner
+        $statement = $this->pdo->prepare("SELECT ads.*, car_brands.name AS brand, car_models.name AS model, users.name AS owner
                                     FROM ads 
                                     JOIN car_brands ON ads.brand_id = car_brands.id 
                                     JOIN car_models ON ads.model_id = car_models.id 
                                     JOIN users ON ads.user_id = users.id  
                                     WHERE ads.id = :id 
         ");
-        $statement1->execute(['id' => $id]);
+        $statement->execute(['id' => $id]);
 
-        return $statement1->fetch();
+        return $statement->fetch();
     }
 
     public function edit($current_ad, $current_ad_id): void
@@ -31,12 +80,10 @@ class Ad extends QueryBuilder
         $location = empty($_POST['location']) ? $current_ad->location : trim($_POST['location']);
         $description = empty($_POST['description']) ? $current_ad->description : trim($_POST['description']);
 
-        $statement = $this->pdo->prepare('SELECT * FROM car_models WHERE id = :model_id AND brand_id = :brand_id');
-        $statement->execute(['model_id' => $modelId, 'brand_id' => $brandId]);
-        $model = $statement->fetchAll();
+        $carModel = $this->carModels->findByBrandAndModel($brandId, $modelId);
 
         $has_validation_error =
-            count($model) !== 1 ||
+            count($carModel) !== 1 ||
             $price <= 0 ||
             $year < 1900 || $year > 2026 ||
             $mileage < 0 ||
@@ -108,12 +155,10 @@ class Ad extends QueryBuilder
         $location = isset($_POST['location']) ? trim($_POST['location']) : null;
         $description = isset($_POST['description']) ? trim($_POST['description']) : null;
 
-        $statement1 = $this->pdo->prepare('SELECT * FROM car_models WHERE id = :model_id AND brand_id = :brand_id');
-        $statement1->execute(['model_id' => $modelId, 'brand_id' => $brandId]);
-        $model = $statement1->fetchAll();
+        $carModel = $this->carModels->findByBrandAndModel($brandId, $modelId);
 
         $this->has_validation_error =
-            count($model) !== 1 ||
+            count($carModel) !== 1 ||
             $price <= 0 ||
             $year < 1900 || $year > 2026 ||
             $mileage < 0 ||

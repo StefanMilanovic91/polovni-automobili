@@ -44,12 +44,14 @@ function isLoggedIn()
     return isset($_SESSION['user']);
 }
 
-function requireLogin()
+function redirectIfNotLoggedIn(): void
 {
-    if (!isLoggedIn()) {
-        header('Location: /?dialog=login');
-        exit;
+    if (isLoggedIn()) {
+        return;
     }
+
+    header('Location: /?dialog=login');
+    exit;
 }
 
 function getIdFromQuery()

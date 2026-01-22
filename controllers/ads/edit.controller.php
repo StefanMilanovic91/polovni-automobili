@@ -1,5 +1,7 @@
 <?php
-requireLogin();
+
+redirectIfNotLoggedIn();
+
 $current_id = getIdFromQuery();
 
 if (!($current_id > 0)) {
@@ -8,7 +10,6 @@ if (!($current_id > 0)) {
 }
 
 $current_ad = $ad->get($current_id);
-//dd($current_ad);
 
 // TODO: Add view for case that ad is not found
 if (!$current_ad) {
@@ -16,9 +17,7 @@ if (!$current_ad) {
     exit;
 }
 
-$statement = $pdo->prepare("SELECT * FROM car_brands");
-$statement->execute();
-$brands = $statement->fetchAll();
+$brands = $carBrands->getBrands();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $ad->edit($current_ad, $current_id);
@@ -27,4 +26,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit;
 }
 
-view('ads/edit.view', compact('current_ad', 'brands')); // 'images',
+view('ads/edit.view', compact('current_ad', 'brands'));

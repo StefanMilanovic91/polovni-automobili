@@ -5,6 +5,11 @@ class User extends QueryBuilder
     public bool $has_validation_error = false;
     public bool $is_registered_successfully = false;
 
+    public function logout(): void
+    {
+        session_destroy();
+    }
+
     public function login(): void
     {
         $email = isset($_POST['email']) ? trim($_POST['email']) : null;

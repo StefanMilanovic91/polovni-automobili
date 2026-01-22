@@ -15,9 +15,6 @@ if (!$current_ad) {
     exit;
 }
 
-$statement2 = $pdo->prepare("SELECT * FROM ad_images WHERE ad_id = :ad_id");
-$statement2->execute(['ad_id' => $current_id]);
-$images = $statement2->fetchAll();
-//dd($images);
+$images = $ad->getImages($current_id);
 
 view('ads/show.view', compact('current_ad', 'images'));

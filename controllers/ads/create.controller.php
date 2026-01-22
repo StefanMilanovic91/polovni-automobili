@@ -1,12 +1,11 @@
 <?php
-requireLogin();
+
+redirectIfNotLoggedIn();
 
 $brands = [];
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    $statement = $pdo->prepare("SELECT * FROM car_brands");
-    $statement->execute();
-    $brands = $statement->fetchAll();
+    $brands = $carBrands->getBrands();
 } else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $ad->create();
 
