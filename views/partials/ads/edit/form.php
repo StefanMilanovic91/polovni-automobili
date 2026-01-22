@@ -1,6 +1,6 @@
 <form
         method="POST"
-        action="<?= '/ads/edit?id=' . $ad->id ?>"
+        action="<?= '/ads/edit?id=' . $current_ad->id ?>"
         enctype="multipart/form-data"
 >
 
@@ -8,8 +8,8 @@
         <div class="col-md-6">
             <label for="brand-selector" class="form-label">Marka</label>
             <select id="brand-selector" name="brand_id" class="form-select" required>
-                <option value="<?= $ad->brand_id ?>">
-                    <?= $ad->brand ?>
+                <option value="<?= $current_ad->brand_id ?>">
+                    <?= $current_ad->brand ?>
                 </option>
                 <?php foreach ($brands as $brand): ?>
                     <option value="<?= $brand->id; ?>">
@@ -22,7 +22,7 @@
         <div class="col-md-6">
             <label for="model-selector" class="form-label">Model</label>
             <select id="model-selector" name="model_id" class="form-select" disabled required>
-                <option value="<?= $ad->model_id ?>"><?= $ad->model ?></option>
+                <option value="<?= $current_ad->model_id ?>"><?= $current_ad->model ?></option>
             </select>
         </div>
     </div>
@@ -33,7 +33,7 @@
                 type="number"
                 name="price"
                 class="form-control"
-                value="<?= $ad->price ?>"
+                value="<?= $current_ad->price ?>"
                 required
         >
     </div>
@@ -42,7 +42,7 @@
         <div class="col-md-6">
             <label for="year-selector" class="form-label">Godište</label>
             <select id="year-selector" name="year" class="form-select" required>
-                <option value="<?= $ad->year ?>"><?= $ad->year ?></option>
+                <option value="<?= $current_ad->year ?>"><?= $current_ad->year ?></option>
             </select>
         </div>
 
@@ -52,7 +52,7 @@
                     type="number"
                     name="mileage"
                     class="form-control"
-                    value="<?= $ad->mileage ?>"
+                    value="<?= $current_ad->mileage ?>"
                     required
             >
         </div>
@@ -64,7 +64,7 @@
                 type="text"
                 name="location"
                 class="form-control"
-                value="<?= $ad->location ?>"
+                value="<?= $current_ad->location ?>"
                 required
         >
     </div>
@@ -72,14 +72,14 @@
     <div class="mb-4">
         <label class="form-label">Kratak opis</label>
         <textarea
-                name="description"
-                class="form-control"
-                rows="4"
-                required
-        ><?= $ad->description ?></textarea>
+            name="description"
+            class="form-control"
+            rows="4"
+            required
+        ><?= $current_ad->description ?></textarea>
     </div>
 
-    <!--TODO: Omoguci edit slika-->
+    <!--TODO: Allows images update -->
     <!--    <div class="mb-4">-->
     <!--        <label class="form-label">-->
     <!--            Slike vozila-->
@@ -98,7 +98,7 @@
         Sačuvaj izmene
     </button>
     <button type="button"
-            data-ad-id="<?= $ad->id ?>"
+            data-ad-id="<?= $current_ad->id ?>"
             id="remove-ad-btn"
             class="btn btn-danger btn-lg w-100 mt-3">
         Obriši oglas

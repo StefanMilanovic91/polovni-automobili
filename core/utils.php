@@ -44,15 +44,23 @@ function isLoggedIn()
     return isset($_SESSION['user']);
 }
 
-function requireLogin()
+function redirectIfNotLoggedIn(): void
 {
-    if (!isLoggedIn()) {
-        header('Location: /?dialog=login');
-        exit;
+    if (isLoggedIn()) {
+        return;
     }
+
+    header('Location: /?dialog=login');
+    exit;
 }
 
 function getIdFromQuery()
 {
     return isset($_GET['id']) && !empty($_GET['id']) ? (int)$_GET['id'] : null;
+}
+
+// TODO: Rethink, maybe move the following func to the User class.
+function getSessionUser()
+{
+    return empty($_SESSION['user']) ? null : $_SESSION['user'];
 }

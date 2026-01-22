@@ -10,6 +10,7 @@ function handleDialogs() {
     const params = new URLSearchParams(window.location.search);
     const dialogParam = params.get('dialog');
     const hasValidationError = params.get('hasValidationError') === 'true';
+    const isRegisteredSuccessfully = params.get('isRegisteredSuccessfully') === 'true';
 
     if (dialogParam === 'register' || dialogParam === 'login') {
         const dialog = document.getElementById(`${dialogParam}Dialog`);
@@ -22,6 +23,12 @@ function handleDialogs() {
                 const errorMessageBox = dialog.querySelector('#errorMessageBox');
 
                 errorMessageBox.style.display = 'block';
+            }
+
+            if (isRegisteredSuccessfully) {
+                const successMessageBox = dialog.querySelector('#successMessageBox');
+
+                successMessageBox.style.display = 'block';
             }
 
             dialog.onclose = function () {

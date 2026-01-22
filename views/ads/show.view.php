@@ -12,12 +12,12 @@
     <div class="row justify-content-center">
         <div class="col-12 col-md-10 col-lg-8">
             <div id="ad-update-buttons" class="mb-3 gap-3">
-                <?php if (isLoggedIn() && $ad->user_id === $_SESSION['user']['id']): ?>
-                    <a href="/ads/edit?id=<?= $ad->id ?>"
+                <?php if (isLoggedIn() && $current_ad->user_id === $_SESSION['user']['id']): ?>
+                    <a href="/ads/edit?id=<?= $current_ad->id ?>"
                        class="btn btn-secondary">
                         Izmeni
                     </a>
-                    <button id="remove-ad-btn" data-ad-id="<?= $ad->id ?>" class="btn btn-danger">
+                    <button id="remove-ad-btn" data-ad-id="<?= $current_ad->id ?>" class="btn btn-danger">
                         Obriši
                     </button>
                 <?php endif; ?>
@@ -29,28 +29,28 @@
                         <div class="col-12 col-md-7">
 
                             <h3 class="fw-bold mb-2">
-                                <?= $ad->brand ?> <?= $ad->model ?>
+                                <?= $current_ad->brand ?> <?= $current_ad->model ?>
                             </h3>
 
                             <p class="text-muted mb-4">
-                                <?= $ad->location ?>
+                                <?= $current_ad->location ?>
                             </p>
 
                             <div class="row mb-4">
                                 <div class="col-6 mb-2">
                                     <strong>Godište:</strong><br>
-                                    <?= $ad->year ?>
+                                    <?= $current_ad->year ?>
                                 </div>
                                 <div class="col-6 mb-2">
                                     <strong>Kilometraža:</strong><br>
-                                    <?= $ad->mileage ?> km
+                                    <?= $current_ad->mileage ?> km
                                 </div>
                             </div>
 
                             <div class="mb-4">
                                 <h6 class="fw-bold">Opis</h6>
                                 <p class="mb-0">
-                                    <?= $ad->description ?>
+                                    <?= $current_ad->description ?>
                                 </p>
                             </div>
 
@@ -60,7 +60,7 @@
 
                             <div class="border rounded p-3 mb-4 bg-light">
                                 <div class="fs-4 fw-bold text-success">
-                                    <?= $ad->price ?>€
+                                    <?= $current_ad->price ?>€
                                 </div>
                                 <div class="text-muted small">
                                     Cena
@@ -71,11 +71,11 @@
                                 <h6 class="fw-bold mb-2">Prodavac</h6>
 
                                 <div class="mb-1">
-                                    <?= $ad->owner ?>
+                                    <?= $current_ad->owner ?>
                                 </div>
 
                                 <div class="text-muted small">
-                                    Lokacija: <?= $ad->location ?>
+                                    Lokacija: <?= $current_ad->location ?>
                                 </div>
                             </div>
 
